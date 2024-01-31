@@ -1,0 +1,68 @@
+version: 2
+
+sources:
+  - name: airbyte_raw
+    schema: RAW
+    tables: 
+      - name: web_sales
+      - name: catalog_sales
+      - name: inventory
+      - name: date_dim
+      - name: customer
+        columns:
+          - name: c_customer_sk
+            tests:
+              - not_null
+              - unique
+          - name: C_CURRENT_ADDR_SK
+            tests:
+              - relationships:
+                  to: source('airbyte_raw','customer_address')
+                  field: ca_address_sk
+          - name: C_CURRENT_CDEMO_SK
+            tests:
+              - relationships:
+                  to: source('airbyte_raw','customer_demographics')
+                  field: cd_demo_sk
+          - name: C_CURRENT_HDEMO_SK
+            tests:
+              - relationships:
+                  to: source('airbyte_raw','household_demographics')
+                  field: hd_demo_sk
+      - name: customer_address
+        columns:
+          - name: ca_address_sk
+            tests:
+              - not_null
+              - unique
+      - name: customer_demographics
+        columns:
+          - name: cd_demo_sk
+            tests:
+              - unique
+      - name: household_demographics
+        columns:
+          - name: hd_demo_sk
+            tests:
+              - unique
+          - name: hd_income_band_sk
+            tests:
+              - relationships:
+                  to: source('airbyte_raw','income_band')
+                  field: ib_income_band_sk
+      - name: income_band
+        columns:
+          - name: ib_income_band_sk
+            tests:
+              - unique
+      - name: item
+        columns:
+          - name: i_item_sk
+            tests:
+              - not_null
+              - unique
+      - name: promotion
+        columns:
+          - name: p_promo_sk
+            tests:
+              - not_null

@@ -1,0 +1,73 @@
+
+version: 2
+
+models:
+  - name: customer_dim
+    description: "Customer Dimension"
+    columns:
+      - name: c_customer_sk
+        tests:
+          - not_null
+          - assert_unique_active_records
+      - name: c_current_addr_sk
+        tests:
+          - not_null
+  - name: weekly_sales_inventory
+    description: "Weekly Sales Inventory Fact Table"
+    columns:
+      - name: warehouse_sk
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+      - name: item_sk
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+      - name: yr_wk_num
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              value: 6
+      - name: yr_num
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              value: 4
+      - name: mnth_num
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 1
+              max_value: 2
+      - name: low_stock_flg_wk
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['TRUE','FALSE']
+  - name: monthly_customer_sales
+    description: "Monthly Customer Sales Fact Table"
+    columns:
+      - name: customer_sk
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+      - name: yr_mnth_num
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 5
+              max_value: 6
+      - name: yr_num
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              value: 4
+      - name: mnth_num
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 1
+              max_value: 2
+      - name: sales_category
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['1','2']

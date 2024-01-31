@@ -1,0 +1,13 @@
+dbt_tpcds:
+  outputs:
+    dev:
+      account: aj57524.us-east-2.aws
+      database: TPCDS
+      password: P@55w0rd123
+      role: AccountAdmin
+      schema: RAW
+      threads: 1
+      type: snowflake
+      user: ShaheenK25
+      warehouse: COMPUTE_WH
+  target: dev
