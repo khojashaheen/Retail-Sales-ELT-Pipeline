@@ -21,8 +21,7 @@ The pipeline leveraged a combination of technologies, including:
 
 ## Pre-requisites
 - AWS Account: Sign up for an AWS Account
-- Docker: Download and install Docker
 - Snowflake: Create an account on Snowflake
-- Python 3.7: Download and install Python 3.7
+- Metabase: Create an account on Metabase
 
 ## Installation
