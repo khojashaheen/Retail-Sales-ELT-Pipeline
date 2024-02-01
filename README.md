@@ -1,4 +1,4 @@
-# aws-snowflake-elt-pipeline
+# Retail-Sales-ELT-Pipeline
 ## Description
 An end-to-end ELT pipeline using AWS infrastructure and Snowflake Data Warehouse to process a Retail Sales dataset, with analytics dashboarding via Metabase.
 
@@ -25,7 +25,7 @@ The pipeline leveraged a combination of technologies, including:
 
 ## Installation Steps
 ### 1. Clone the Repository:
-	Use git clone https://github.com/khojashaheen/aws-snowflake-elt-pipeline to clone this repository to your local machine.
+	Use git clone https://github.com/khojashaheen/Retail-Sales-ELT-Pipeline to clone this repository to your local machine.
 
 ### 2. Complete Pre-requisites Steps:
 Ensure you have created an account for AWS and Snowflake
